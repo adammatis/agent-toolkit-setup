@@ -92,4 +92,4 @@ Notes:
 
 ## Verification
 
-See [VERIFY.md](/Users/adammatis/Documents/Codex/2026-06-03/how-can-i-setup-codex-to/VERIFY.md) for a checklist and expected commands.
+See [VERIFY.md](./VERIFY.md) for a checklist and expected commands.

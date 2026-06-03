@@ -19,6 +19,7 @@ GLOBAL_RULES_PATH="$CODEX_HOME/GLOBAL-MAC-AGENTS.md"
 RTK_DOC_PATH="$CODEX_HOME/RTK.md"
 REPOWISE_DOC_PATH="$CODEX_HOME/REPOWISE.md"
 CAVEMAN_DOC_PATH="$CODEX_HOME/CAVEMAN.md"
+CLAUDE_APP_PATH="/Applications/Claude.app"
 
 print_usage() {
   cat <<EOF
@@ -115,6 +116,10 @@ parse_args() {
 
 command_exists() {
   command -v "$1" >/dev/null 2>&1
+}
+
+claude_app_installed() {
+  [[ -d "$CLAUDE_APP_PATH" ]]
 }
 
 brew_prefix_guess() {
@@ -312,8 +317,10 @@ ensure_caveman() {
 
   if command_exists claude; then
     run_shell "Install Caveman plugin for Claude Code" 'claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman'
+  elif claude_app_installed; then
+    warn "Claude.app is installed, but the 'claude' CLI is not on PATH; skipped Caveman Claude plugin install."
   else
-    warn "Claude Code not found; skipped Caveman Claude plugin install."
+    warn "Claude CLI and Claude.app were not found; skipped Caveman Claude plugin install."
   fi
 }
 
@@ -469,7 +476,13 @@ print_summary() {
   verify_binary "repowise" repowise
   verify_binary "node" node
   verify_binary "npx" npx
-  verify_binary "claude" claude
+  if command_exists claude; then
+    printf '  [ok] %s\n' "claude CLI"
+  elif claude_app_installed; then
+    printf '  [app-only] %s\n' "$CLAUDE_APP_PATH"
+  else
+    printf '  [missing] %s\n' "claude CLI / Claude.app"
+  fi
 
   if [[ -f "$AGENTS_PATH" ]]; then
     printf '  [ok] %s\n' "$AGENTS_PATH"

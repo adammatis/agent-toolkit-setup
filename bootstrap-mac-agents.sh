@@ -344,7 +344,7 @@ Prefer installed local capabilities over generic fallbacks when they are availab
 
 Use the Repowise MCP tool first for codebase exploration, architecture lookup, semantic search, and change-risk analysis when it is available in the current project.
 
-Use caveman skills only when the user explicitly asks for caveman mode, fewer tokens, or very brief output.
+Use caveman skills when the user asks for them, or when the agent decides extra brevity or token efficiency is helpful for the task.
 
 Prefer \`rtk\` for shell commands when it is available and the task is naturally a shell command.
 
@@ -422,7 +422,7 @@ EOF
   caveman_doc="$(cat <<'EOF'
 # Caveman
 
-Use caveman only when the user asks for it or clearly asks for maximum brevity or token efficiency.
+Use caveman when the user asks for it, or when the agent decides maximum brevity or token efficiency is helpful.
 
 Triggers include:
 - `caveman`
@@ -431,7 +431,7 @@ Triggers include:
 - `less tokens`
 - `be brief`
 
-For Codex, Caveman is trigger-based, not always-on. Use the installed skill rather than inventing a custom compressed style.
+For Codex, Caveman is optional and not always-on. The agent may choose it when brevity helps, and should use the installed skill rather than inventing a custom compressed style.
 
 For Claude Code, plugin and hook behavior should come from the upstream Caveman plugin install, not from custom global instructions.
 EOF

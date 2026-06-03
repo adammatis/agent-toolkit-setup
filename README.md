@@ -87,7 +87,7 @@ Notes:
 
 - Codex is the primary target.
 - Claude support is installed only where upstream provides a clean native path.
-- Caveman stays trigger-based for Codex; it is not forced always-on.
+- Caveman is optional for Codex; it can be user-triggered or chosen by the agent when brevity helps, but it is not forced always-on.
 - Repowise stays repo/workspace-local; no global MCP server is pinned to one project.
 
 ## Verification

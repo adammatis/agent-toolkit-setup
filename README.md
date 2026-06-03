@@ -6,6 +6,7 @@ Portable bootstrap for a fresh macOS machine with:
 - RTK for compact shell output
 - Caveman for Codex and Claude Code
 - Repowise installed globally, initialized per project
+- Local usage reporting for RTK savings and Claude token usage
 
 ## What this installs
 
@@ -55,6 +56,32 @@ Then verify:
 ls /path/to/repo-or-workspace/.mcp.json
 repowise status /path/to/repo-or-workspace
 ```
+
+## Usage reporting
+
+Check machine-level RTK savings and Claude token usage:
+
+```bash
+./agent-usage-report.py
+```
+
+Scope it to one project:
+
+```bash
+./agent-usage-report.py --project ~/Repos/some-repo
+```
+
+JSON output:
+
+```bash
+./agent-usage-report.py --json
+```
+
+Notes:
+
+- RTK savings are exact and come from `rtk gain --format json`.
+- Claude usage is aggregated from local `~/.claude/projects/*.jsonl` session logs.
+- Claude Caveman savings are not exposed as a stable global file by default, so this tool reports real usage and points you to `/caveman-stats` for per-session Caveman savings inside Claude.
 
 ## Design rules
 

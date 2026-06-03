@@ -36,6 +36,20 @@ rtk init -g --codex
 rtk gain
 ```
 
+Expected usage reporting:
+
+```bash
+./agent-usage-report.py
+./agent-usage-report.py --json
+./agent-usage-report.py --project /path/to/repo
+```
+
+Expected behavior:
+
+- RTK section reports exact savings if `rtk` is installed.
+- Claude section reports real token usage if local Claude session logs exist.
+- Claude Caveman savings are clearly marked unavailable unless you inspect them in-session with `/caveman-stats`.
+
 Expected Caveman integration:
 
 ```bash
